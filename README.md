@@ -13,7 +13,34 @@ bash
 python -m venv .venv
 # Windows:
 .venv\Scripts\activate
+```bash
+# macOS / Linux (bash/zsh)
+source .venv/bin/activate
 
+# Windows (Command Prompt)
+.venv\Scripts\activate
+
+# Windows (PowerShell)
+.venv\Scripts\Activate.ps1
+
+# Git Bash / WSL
+source .venv/bin/activate
+```
+
+Verify the environment is active (your prompt will show the venv name) and check versions:
+```bash
+python --version
+pip --version
+```
+
+Optional housekeeping:
+```bash
+# Upgrade pip inside the venv
+pip install --upgrade pip
+
+# When finished, deactivate the virtual environment
+deactivate
+```
 4. Install Dependencies
 bash
 pip install -r requirements.txt
