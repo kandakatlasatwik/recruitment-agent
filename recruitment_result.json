@@ -1,0 +1,6 @@
+{
+  "status": "rejected",
+  "reason": "ATS score below threshold",
+  "ats_score": 68,
+  "recommendation": "Interview. Good foundational skills in AI/ML, relevant projects, and certifications align well. Lacks extensive experience, but potential for growth is evident. Assess practical skills."
+}
