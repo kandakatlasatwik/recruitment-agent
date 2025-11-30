@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import Dashboard from './components/Dashboard'
 import './App.css'
+import { API_ENDPOINTS } from './config/api'
 
 function App() {
   const [backendHealth, setBackendHealth] = useState(false)
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/health')
+    fetch(API_ENDPOINTS.health)
       .then(res => res.json())
       .then(data => setBackendHealth(data.pipeline_ready))
       .catch(err => console.log('Backend not running yet...'))

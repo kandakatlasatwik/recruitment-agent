@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import FileUpload from './FileUpload'
 import JobRoleSelector from './JobRoleSelector'
 import ResultsDisplay from './ResultsDisplay'
+import { API_ENDPOINTS } from '../config/api'
 import '../styles/Dashboard.css'
 
 export default function Dashboard() {
@@ -17,7 +18,7 @@ export default function Dashboard() {
 
   const fetchJobRoles = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/job-roles')
+      const response = await fetch(API_ENDPOINTS.jobRoles)
       const data = await response.json()
       setRoles(data.roles || [])
       if (data.roles?.length > 0) {
@@ -46,7 +47,7 @@ export default function Dashboard() {
     if (candidateInfo.linkedin) formData.append('candidate_linkedin', candidateInfo.linkedin)
 
     try {
-      const response = await fetch('http://localhost:5000/api/process', {
+      const response = await fetch(API_ENDPOINTS.process, {
         method: 'POST',
         body: formData
       })
@@ -103,15 +104,4 @@ export default function Dashboard() {
       {result && <ResultsDisplay result={result} />}
     </div>
   )
-}
-const fetchJobRoles = async () => {
-    try {
-        const response = await fetch('http://localhost:5000/api/job-roles')
-        const data = await response.json()
-        setRoles(data.roles || [])
-        // Don't auto-select first role, let user choose
-        setSelectedRole('')
-    } catch (err) {
-        setError('Failed to fetch job roles')
-    }
 }
