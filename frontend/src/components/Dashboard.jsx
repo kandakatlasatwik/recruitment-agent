@@ -104,3 +104,14 @@ export default function Dashboard() {
     </div>
   )
 }
+const fetchJobRoles = async () => {
+    try {
+        const response = await fetch('http://localhost:5000/api/job-roles')
+        const data = await response.json()
+        setRoles(data.roles || [])
+        // Don't auto-select first role, let user choose
+        setSelectedRole('')
+    } catch (err) {
+        setError('Failed to fetch job roles')
+    }
+}
