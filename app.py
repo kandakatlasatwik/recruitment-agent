@@ -13,7 +13,11 @@ from agent import RecruitmentPipeline
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=[
+    "https://recruitment-agent-frontend.onrender.com",
+    "http://localhost:5173"  # For local development
+])
+
 
 # Configuration
 UPLOAD_FOLDER = 'uploads'
@@ -94,11 +98,14 @@ def process_application():
         traceback.print_exc()
         return jsonify({'error': str(e)}), 500
 
+# if __name__ == '__main__':
+#     print("\n" + "="*60)
+#     print("🚀 Starting Recruitment Agent Backend")
+#     print("="*60)
+#     print("Backend: http://localhost:5000")
+#     print("Frontend: http://localhost:5173")
+#     print("="*60 + "\n")
+#     app.run(debug=True, host='0.0.0.0', port=5000)
 if __name__ == '__main__':
-    print("\n" + "="*60)
-    print("🚀 Starting Recruitment Agent Backend")
-    print("="*60)
-    print("Backend: http://localhost:5000")
-    print("Frontend: http://localhost:5173")
-    print("="*60 + "\n")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
