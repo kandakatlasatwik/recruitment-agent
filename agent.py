@@ -509,7 +509,7 @@ Resume Text (first 1500 chars):
                 ),
             }
 
-                        print(f"\n{'='*60}")
+            print(f"\n{'='*60}")
             print("✅ Processing Complete!")
             print(f"{'='*60}")
             print(f"Status: {status.upper()}")
