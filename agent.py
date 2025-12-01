@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 from google import genai
 from google.genai import types
+from email_service import EmailService
 
 load_dotenv()
 
@@ -516,6 +517,15 @@ Resume Text (first 1500 chars):
             print(f"Candidate: {complete_result['candidate_info']['name']}")
             print(f"Email: {complete_result['candidate_info']['email']}")
 
+            try:
+                print("\n[5/5] Sending email notification...")
+                email_service = EmailService()
+                email_sent = email_service.send_application_result(complete_result)
+                complete_result["email_sent"] = email_sent
+            except Exception as e:
+                print(f"⚠️ Email sending failed: {e}")
+                complete_result["email_sent"] = False
+
             return complete_result
 
         except Exception as e:
@@ -531,6 +541,10 @@ Resume Text (first 1500 chars):
                 "final_score": 0.0,
                 "error": str(e),
             }
+            
+           
+            
+
 
 if __name__ == "__main__":
     
