@@ -509,7 +509,7 @@ Resume Text (first 1500 chars):
                 ),
             }
 
-            print(f"\n{'='*60}")
+                        print(f"\n{'='*60}")
             print("✅ Processing Complete!")
             print(f"{'='*60}")
             print(f"Status: {status.upper()}")
@@ -517,16 +517,25 @@ Resume Text (first 1500 chars):
             print(f"Candidate: {complete_result['candidate_info']['name']}")
             print(f"Email: {complete_result['candidate_info']['email']}")
 
-            try:
-                print("\n[5/5] Sending email notification...")
-                email_service = EmailService()
-                email_sent = email_service.send_application_result(complete_result)
-                complete_result["email_sent"] = email_sent
-            except Exception as e:
-                print(f"⚠️ Email sending failed: {e}")
+            # Send email only if enabled via environment variable
+            email_enabled = os.getenv("ENABLE_EMAIL", "false").lower() == "true"
+            
+            if email_enabled:
+                try:
+                    print("\n[5/5] Sending email notification...")
+                    from email_service import EmailService
+                    email_service = EmailService()
+                    email_sent = email_service.send_application_result(complete_result)
+                    complete_result["email_sent"] = email_sent
+                except Exception as e:
+                    print(f"⚠️ Email sending failed: {e}")
+                    complete_result["email_sent"] = False
+            else:
+                print("\n⚠️ Email notifications disabled (set ENABLE_EMAIL=true to enable)")
                 complete_result["email_sent"] = False
 
             return complete_result
+
 
         except Exception as e:
             
