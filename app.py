@@ -13,11 +13,16 @@ from agent import RecruitmentPipeline
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, origins=[
-    "https://recruitment-agent-frontend.onrender.com",
-    "http://localhost:5173"  # For local development
-])
-
+CORS(app, 
+     resources={r"/api/*": {"origins": [
+         "https://recruitment-agent-frontend.onrender.com",
+         "http://localhost:5173",
+         "http://localhost:5000"
+     ]}},
+     supports_credentials=True,
+     allow_headers=["Content-Type", "Authorization"],
+     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+)
 
 # Configuration
 UPLOAD_FOLDER = 'uploads'
