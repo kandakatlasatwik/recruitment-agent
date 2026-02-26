@@ -102,6 +102,16 @@ export default function Dashboard() {
       </div>
 
       {result && <ResultsDisplay result={result} />}
+
+      <footer className="dashboard-footer">
+        <a
+          href="https://github.com/kandakatlasatwik/recruitment-agent"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ⭐ Find this repo on GitHub
+        </a>
+      </footer>
     </div>
   )
 }

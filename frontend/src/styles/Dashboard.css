@@ -71,3 +71,21 @@
 .required {
     color: red;
 }
+
+.dashboard-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.dashboard-footer a {
+    color: #555;
+    text-decoration: none;
+}
+
+.dashboard-footer a:hover {
+    color: #222;
+    text-decoration: underline;
+}
